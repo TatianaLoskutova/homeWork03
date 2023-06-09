@@ -1,11 +1,20 @@
 import {blogsCollection} from './db';
 import {BlogInputModel} from '../models/blog/Post_Blog_Model';
 import {BlogType} from '../types';
+import {ObjectId} from 'mongodb';
 
 
 export const blogsRepository = {
     async findAllBlogs(): Promise<BlogType[]> {
-        return blogsCollection.find({}).toArray()
+        const result = await blogsCollection.find({}).toArray()
+        return result.map((b:BlogType) => ({
+            id: b._id.toString(),
+            name: b.name,
+            description: b.description,
+            websiteUrl: b.websiteUrl,
+            createdAt: b.createdAt,
+            isMembership: b.isMembership
+        }))
     },
     // async findBlogById(id: string): Promise<BlogType | null> {
     //     const foundedBlog: BlogType | null = await blogsCollection.findOne({id: id})
@@ -16,8 +25,8 @@ export const blogsRepository = {
     //     }
     // },
     async createBlog(data: BlogInputModel): Promise<BlogType> {
-        const newBlog = {
-            id: Math.random().toString(36),
+        const newBlog: BlogType = {
+            _id: new ObjectId(),
             name: data.name,
             description: data.description,
             websiteUrl: data.websiteUrl,
@@ -25,7 +34,14 @@ export const blogsRepository = {
             isMembership: false
         }
         const result = await blogsCollection.insertOne(newBlog)
-        return newBlog
+        return {
+            id: newBlog._id.toString(),
+            name: newBlog.name,
+            description: newBlog.description,
+            websiteUrl: newBlog.websiteUrl,
+            createdAt: newBlog.createdAt,
+            isMembership: newBlog.isMembership
+        }
     },
 
     async deleteBlog(id: string): Promise<boolean> {

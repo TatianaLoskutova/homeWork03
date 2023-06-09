@@ -4,19 +4,16 @@ import {BlogType, PostType} from '../types';
 dotenv.config()
 
 
-
-// const mongoURI = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017' проверить потом с 27017
-
-const mongoURI = process.env.MONGO_URL
+const mongoURI = process.env.MONGO_URL /* || 'mongodb://0.0.0.0:27017' */
 console.log('url :', mongoURI)
 if (!mongoURI) {
     throw new Error('Url is not exist')
 }
 const client = new MongoClient(mongoURI)
+const db = client.db('api')
 
-
-export const blogsCollection = client.db().collection<BlogType>('blogs')
-export const postsCollection = client.db().collection<PostType>('posts')
+export const blogsCollection = db.collection<BlogType>('blogs')
+export const postsCollection = db.collection<PostType>('posts')
 
 export const runDb = async () => {
     try {
