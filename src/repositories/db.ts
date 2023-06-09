@@ -1,5 +1,7 @@
 // import {BlogType, PostType} from '../types';
 import {MongoClient, ObjectId} from 'mongodb';
+import dotenv from 'dotenv'
+dotenv.config()
 
 export type BlogType = {
     _id?: ObjectId
@@ -8,9 +10,12 @@ export type BlogType = {
 
 // const mongoURI = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017'
 // console.log(process.env.MONGO_URL)
-const url = 'mongodb+srv://tanisha:Loskutidze1988@cluster0.clobhkg.mongodb.net/network-dev?retryWrites=true&w=majority'
-console.log('url :', url)
-const client = new MongoClient(url)
+const mongoURI = process.env.MONGO_URL
+console.log('url :', mongoURI)
+if (!mongoURI) {
+    throw new Error('Url is not exist')
+}
+const client = new MongoClient(mongoURI)
 
 
 // const client = new MongoClient(mongoURI)
