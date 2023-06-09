@@ -70,13 +70,5 @@ blogRouters.delete('/:id',
         }
     })
 
-blogRouters.delete('/',
-    async (req: Request, res: Response) => {
-        const isDeleted = await blogsRepository.deleteAllBlogs()
-        if (isDeleted) {
-            res.sendStatus(204);
-        } else {
-            res.sendStatus(404);
-        }
-    })
+
 

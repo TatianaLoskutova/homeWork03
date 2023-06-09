@@ -12,7 +12,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     const loginPass = authHeader.replace('Basic', '')
     const [login, password] = base64.decode(loginPass).split(':')
 
-    if (login !== 'admin' || password !== 'qwerty') {
+    if (login !== 'tanisha' || password !== 'Loskutidze1988') {
         res.status(401).send('Invalid login or password')
     }
 }
