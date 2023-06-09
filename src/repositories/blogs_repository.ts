@@ -1,7 +1,8 @@
 // import {BlogType} from '../types';
-import {blogsCollection, BlogType} from './db';
+import {blogsCollection} from './db';
 import {BlogInputModel} from '../models/blog/Post_Blog_Model';
 import {UpdateBlogModel} from '../models/blog/Put_Blog_Model';
+import {BlogType} from '../types';
 
 
 export const blogsRepository = {
