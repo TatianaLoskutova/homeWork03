@@ -1,7 +1,5 @@
-// import {BlogType} from '../types';
 import {blogsCollection} from './db';
 import {BlogInputModel} from '../models/blog/Post_Blog_Model';
-import {UpdateBlogModel} from '../models/blog/Put_Blog_Model';
 import {BlogType} from '../types';
 
 
@@ -17,12 +15,17 @@ export const blogsRepository = {
     //         return null
     //     }
     // },
-    async createBlog(name: string): Promise<BlogType> {
-        const result = await blogsCollection.insertOne({name})
-        return {
-            name: name,
-            _id: result.insertedId
+    async createBlog(data: BlogInputModel): Promise<BlogType> {
+        const newBlog = {
+            id: Math.random().toString(36),
+            name: data.name,
+            description: data.description,
+            websiteUrl: data.websiteUrl,
+            createdAt: new Date().toISOString(),
+            isMembership: false
         }
+        const result = await blogsCollection.insertOne(newBlog)
+        return newBlog
     }
 }
 //     async updateBlog(id: string, name: string, description: string ,websiteUrl: string): Promise<boolean> {
