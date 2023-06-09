@@ -40,7 +40,7 @@ blogRouters.post('/',
     blogDescriptionValidation,
     blogWebsiteUrlValidation,
     // errorsMiddleware,
-    async (req: RequestWithBody<BlogInputModel>, res: Response<BlogViewModel>) => {
+    async (req: Request, res: Response) => {
         const newBlog: BlogType = await blogsRepository.createBlog(req.body)
         res.status(201).send(newBlog)
 
