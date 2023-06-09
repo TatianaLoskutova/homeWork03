@@ -10,3 +10,5 @@
 //     .isString().withMessage('Should be string')
 //     .trim().isLength({min: 1, max: 100}).withMessage('Incorrect length')
 //     .matches('^https://([a-zA-Z0-9_-]+\\.)+[a-zA-Z0-9_-]+(\\/[a-zA-Z0-9_-]+)*\\/?$').withMessage('Incorrect Url')
+
+//     .matches('^https://([a-zA-Z0-9_-]+\\.)+[a-zA-Z0-9_-]+(3\\/[a-zA-Z0-9_-]+)*\\/?$').withMessage('Incorrect Url')
