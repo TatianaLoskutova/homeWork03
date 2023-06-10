@@ -11,7 +11,7 @@ import {GetByIdParam} from '../models/Get_By_Id';
 export const blogRouters = Router()
 
 blogRouters.get('/', async (req:Request, res: Response) => {
-    const allBlogs = await blogsRepository.findAllBlogs()
+    const allBlogs: BlogType[] = await blogsRepository.findAllBlogs()
     res.status(200).send(allBlogs)
 })
 

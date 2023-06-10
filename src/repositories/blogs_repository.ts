@@ -7,8 +7,17 @@ import {UpdateBlogModel} from '../models/blog/Put_Blog_Model';
 
 export const blogsRepository = {
 
-    async findAllBlogs(): Promise<BlogMongoDbType[]> { // тип вопрос
-        return await blogsCollection.find({}).toArray()
+    async findAllBlogs(): Promise<BlogType[]> {
+        const allBlogs = await blogsCollection.find({}).toArray()
+        return allBlogs.map((blog: BlogMongoDbType ) => ({
+            id: blog._id.toString(),
+            name: blog.name,
+            description: blog.description,
+            websiteUrl: blog.websiteUrl,
+            createdAt: blog.createdAt,
+            isMembership: blog.isMembership
+        }) )
+
     },
 
     async findBlogById(id: string): Promise<BlogType | null> {
@@ -21,8 +30,8 @@ export const blogsRepository = {
             name: foundedBlog.name,
             description: foundedBlog.description,
             websiteUrl: foundedBlog.websiteUrl,
-            createdAt: new Date().toISOString(),
-            isMembership: true
+            createdAt: foundedBlog.createdAt,
+            isMembership: foundedBlog.isMembership
         }
     },
 
@@ -41,8 +50,8 @@ export const blogsRepository = {
             name: newBlog.name,
             description: newBlog.description,
             websiteUrl: newBlog.websiteUrl,
-            createdAt: new Date().toISOString(),
-            isMembership: false
+            createdAt: newBlog.createdAt,
+            isMembership: newBlog.isMembership
         }
     },
 
