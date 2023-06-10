@@ -15,4 +15,5 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     if (login !== 'admin' || password !== 'qwerty') {
         res.status(401).send('Invalid login or password')
     }
+    next()
 }
