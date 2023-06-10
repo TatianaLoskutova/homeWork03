@@ -58,16 +58,16 @@ blogRouters.post('/',
 //         }
 //     })
 //
-blogRouters.delete('/:id',
-    authMiddleware,
-    async (req: RequestWithParams<GetByIdParam>, res: Response) => {
-        const isDeleted = await blogsRepository.deleteBlog(req.params.id)
-        if (isDeleted) {
-            res.sendStatus(204);
-        } else {
-            res.sendStatus(404);
-        }
-    })
+// blogRouters.delete('/:id',
+//     authMiddleware,
+//     async (req: RequestWithParams<GetByIdParam>, res: Response) => {
+//         const isDeleted = await blogsRepository.deleteBlog(req.params.id)
+//         if (isDeleted) {
+//             res.sendStatus(204);
+//         } else {
+//             res.sendStatus(404);
+//         }
+//     })
 
 
 

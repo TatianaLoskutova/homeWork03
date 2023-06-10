@@ -7,7 +7,7 @@ import {ObjectId} from 'mongodb';
 export const blogsRepository = {
     async findAllBlogs(): Promise<BlogType[]> {
         const result = await blogsCollection.find({}).toArray()
-        return result.map((b:BlogType) => ({
+        return result.map(b => ({
             id: b._id.toString(),
             name: b.name,
             description: b.description,
@@ -33,21 +33,22 @@ export const blogsRepository = {
             createdAt: new Date().toISOString(),
             isMembership: false
         }
-        const result = await blogsCollection.insertOne(newBlog)
-        return {
-            id: newBlog._id.toString(),
-            name: newBlog.name,
-            description: newBlog.description,
-            websiteUrl: newBlog.websiteUrl,
-            createdAt: newBlog.createdAt,
-            isMembership: newBlog.isMembership
-        }
+        await blogsCollection.insertOne(newBlog)
+        return newBlog
+        // return {
+        //     id: newBlog._id.toString(),
+        //     name: newBlog.name,
+        //     description: newBlog.description,
+        //     websiteUrl: newBlog.websiteUrl,
+        //     createdAt: newBlog.createdAt,
+        //     isMembership: newBlog.isMembership
+        // }
     },
 
-    async deleteBlog(id: string): Promise<boolean> {
-        const result = await blogsCollection.deleteOne({id: id})
-        return result.deletedCount === 1
-    }
+    // async deleteBlog(id: string): Promise<boolean> {
+    //     const result = await blogsCollection.deleteOne({id: id})
+    //     return result.deletedCount === 1
+    // }
 
 
 }
