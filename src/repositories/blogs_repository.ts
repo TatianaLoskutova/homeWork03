@@ -1,6 +1,6 @@
 import {blogsCollection} from './db';
 import {BlogInputModel} from '../models/blog/Post_Blog_Model';
-import {BlogType} from '../types';
+import {BlogMongoDbType, BlogType} from '../types';
 import {ObjectId} from 'mongodb';
 
 
@@ -25,7 +25,7 @@ export const blogsRepository = {
     //     }
     // },
     async createBlog(data: BlogInputModel): Promise<BlogType> {
-        const newBlog: BlogType = {
+        const newBlog: BlogMongoDbType = {
             _id: new ObjectId(),
             name: data.name,
             description: data.description,
@@ -34,7 +34,14 @@ export const blogsRepository = {
             isMembership: false
         }
         await blogsCollection.insertOne(newBlog)
-        return newBlog
+        return {
+            id: newBlog._id.toString(),
+            name: newBlog.name,
+            description: newBlog.description,
+            websiteUrl: newBlog.websiteUrl,
+            createdAt: new Date().toISOString(),
+            isMembership: true
+        }
         // return {
         //     id: newBlog._id.toString(),
         //     name: newBlog.name,

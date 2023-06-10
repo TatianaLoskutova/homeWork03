@@ -1,8 +1,16 @@
 import {Request} from 'express';
 import {ObjectId} from 'mongodb';
 export type BlogType = {
-    _id?: ObjectId
-    id?: string
+    id: string
+    name: string
+    description: string
+    websiteUrl: string
+    createdAt: string
+    isMembership: boolean
+}
+
+export type BlogMongoDbType = {
+    _id: ObjectId
     name: string
     description: string
     websiteUrl: string
