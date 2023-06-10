@@ -14,8 +14,8 @@ export const blogsRepository = {
             name: blog.name,
             description: blog.description,
             websiteUrl: blog.websiteUrl,
-            createdAt: new Date().toISOString(),
-            isMembership: false
+            createdAt: blog.createdAt,
+            isMembership: blog.isMembership
         }) )
 
     },
@@ -30,8 +30,8 @@ export const blogsRepository = {
             name: foundedBlog.name,
             description: foundedBlog.description,
             websiteUrl: foundedBlog.websiteUrl,
-            createdAt: new Date().toISOString(),
-            isMembership: false
+            createdAt: foundedBlog.createdAt,
+            isMembership: foundedBlog.isMembership
         }
     },
 
@@ -50,8 +50,8 @@ export const blogsRepository = {
             name: newBlog.name,
             description: newBlog.description,
             websiteUrl: newBlog.websiteUrl,
-            createdAt: new Date().toISOString(),
-            isMembership: false
+            createdAt: newBlog.websiteUrl,
+            isMembership: newBlog.isMembership
         }
     },
 
