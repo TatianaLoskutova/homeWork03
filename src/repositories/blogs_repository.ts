@@ -21,7 +21,7 @@ export const blogsRepository = {
     },
 
     async findBlogById(id: string): Promise<BlogType | null> {
-        const foundedBlog = await blogsCollection.findOne({id: id})
+        const foundedBlog = await blogsCollection.findOne({_id: ObjectId})
         if (!foundedBlog) {
             return null
         }
