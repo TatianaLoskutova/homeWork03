@@ -42,14 +42,6 @@ export const blogsRepository = {
             createdAt: new Date().toISOString(),
             isMembership: true
         }
-        // return {
-        //     id: newBlog._id.toString(),
-        //     name: newBlog.name,
-        //     description: newBlog.description,
-        //     websiteUrl: newBlog.websiteUrl,
-        //     createdAt: newBlog.createdAt,
-        //     isMembership: newBlog.isMembership
-        // }
     },
 
     // async deleteBlog(id: string): Promise<boolean> {
@@ -59,9 +51,9 @@ export const blogsRepository = {
 
 
 }
-//     async updateBlog(id: string, name: string, description: string ,websiteUrl: string): Promise<boolean> {
-//         const result = await blogsCollection.updateOne({id: id}, {$set: {name: name
-//                 ,description: description, websiteUrl:websiteUrl}})
-//         return result.matchedCount === 1
-//     },
+    // async updateBlog(data: BlogInputModel): Promise<boolean> {
+    //     const result = await blogsCollection.updateOne({id: id}, {$set: {name: name
+    //             ,description: description, websiteUrl:websiteUrl}})
+    //     return result.matchedCount === 1
+    // },
 
