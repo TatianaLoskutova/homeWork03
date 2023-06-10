@@ -42,7 +42,7 @@ export const blogsRepository = {
             description: newBlog.description,
             websiteUrl: newBlog.websiteUrl,
             createdAt: new Date().toISOString(),
-            isMembership: true
+            isMembership: false
         }
     },
 
