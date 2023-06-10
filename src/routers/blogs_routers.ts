@@ -1,11 +1,12 @@
 import {Router, Request, Response} from 'express';
 import {blogsRepository} from '../repositories/blogs_repository';
-import {GetByIdParam} from '../models/Get_By_Id';
 import {authMiddleware} from '../middlewares/authorization_validation';
 import {blogDescriptionValidation, blogNameValidation, blogWebsiteUrlValidation} from '../middlewares/blogs_validators';
 import {BlogType, RequestWithBody, RequestWithParams} from '../types';
 import {BlogInputModel} from '../models/blog/Post_Blog_Model';
-import {BlogViewModel} from '../models/blog/Blog_View_Model';;
+import {BlogViewModel} from '../models/blog/Blog_View_Model';
+import {errorsMiddleware} from '../middlewares/errors_validation';
+
 
 
 
@@ -36,7 +37,7 @@ blogRouters.post('/',
     blogNameValidation,
     blogDescriptionValidation,
     blogWebsiteUrlValidation,
-    // errorsMiddleware,
+    errorsMiddleware,
     async (req: RequestWithBody<BlogInputModel>, res: Response<BlogViewModel>) => {
         const newBlog: BlogType = await blogsRepository.createBlog(req.body)
         res.status(201).send(newBlog)

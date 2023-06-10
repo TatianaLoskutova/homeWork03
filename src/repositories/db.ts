@@ -4,7 +4,7 @@ import {BlogMongoDbType, BlogType, PostType} from '../types';
 dotenv.config()
 
 
-const mongoURI = process.env.MONGO_URL /* || 'mongodb://0.0.0.0:27017' */
+const mongoURI = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017'
 console.log('url :', mongoURI)
 if (!mongoURI) {
     throw new Error('Url is not exist')
