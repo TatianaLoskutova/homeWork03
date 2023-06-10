@@ -21,7 +21,7 @@ export const blogsRepository = {
     },
 
     async findBlogById(id: string): Promise<BlogType | null> {
-        const foundedBlog = await blogsCollection.findOne({_id: ObjectId})
+        const foundedBlog: BlogMongoDbType | null = await blogsCollection.findOne({_id: ObjectId})
         if (!foundedBlog) {
             return null
         }
@@ -30,8 +30,8 @@ export const blogsRepository = {
             name: foundedBlog.name,
             description: foundedBlog.description,
             websiteUrl: foundedBlog.websiteUrl,
-            createdAt: foundedBlog.createdAt,
-            isMembership: foundedBlog.isMembership
+            createdAt: new Date().toISOString(),
+            isMembership: false
         }
     },
 
@@ -50,8 +50,8 @@ export const blogsRepository = {
             name: newBlog.name,
             description: newBlog.description,
             websiteUrl: newBlog.websiteUrl,
-            createdAt: newBlog.createdAt,
-            isMembership: newBlog.isMembership
+            createdAt: new Date().toISOString(),
+            isMembership: false
         }
     },
 
