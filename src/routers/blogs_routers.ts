@@ -16,7 +16,7 @@ blogRouters.get('/', async (req:Request, res: Response) => {
 })
 
 blogRouters.get('/:id', async (req: RequestWithParams<GetByIdParam>, res: Response<BlogType>) => {
-    let foundedBlog = await blogsRepository.findBlogById(req.params.id)
+    const foundedBlog = await blogsRepository.findBlogById(req.params.id)
     if (!foundedBlog) {
         res.sendStatus(404)
         return

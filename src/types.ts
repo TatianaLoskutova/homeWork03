@@ -19,8 +19,17 @@ export type BlogMongoDbType = {
 }
 
 export type PostType = {
-    _id?: ObjectId
     id: string
+    title: string
+    shortDescription: string
+    content: string
+    blogId: string
+    blogName: string
+    createdAt: string
+}
+
+export type PostMongoDbType = {
+    _id: ObjectId
     title: string
     shortDescription: string
     content: string

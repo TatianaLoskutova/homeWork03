@@ -24,20 +24,20 @@ export const blogsRepository = {
         if (!ObjectId.isValid(id)) {
             return null
         }
-            let _id = new ObjectId(id)
-            const foundedBlog: BlogMongoDbType | null = await blogsCollection.findOne({_id: _id})
+        const _id = new ObjectId(id)
+        const foundedBlog: BlogMongoDbType | null = await blogsCollection.findOne({_id: _id})
 
         if (!foundedBlog) {
-                return null
-            }
-            return {
-                id: foundedBlog._id.toString(),
-                name: foundedBlog.name,
-                description: foundedBlog.description,
-                websiteUrl: foundedBlog.websiteUrl,
-                createdAt: foundedBlog.createdAt,
-                isMembership: foundedBlog.isMembership
-            }
+            return null
+        }
+        return {
+            id: foundedBlog._id.toString(),
+            name: foundedBlog.name,
+            description: foundedBlog.description,
+            websiteUrl: foundedBlog.websiteUrl,
+            createdAt: foundedBlog.createdAt,
+            isMembership: foundedBlog.isMembership
+        }
     },
 
     async createBlog(data: BlogInputModel): Promise<BlogType> {
