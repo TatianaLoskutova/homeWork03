@@ -91,11 +91,11 @@ export const postsRepository = {
     },
 
     async deletePostById(id: string): Promise<boolean> {
-        if (!ObjectId.isValid(id)) {
-            return false
-        }
-        const _id = new ObjectId(id)
-        const result = await postsCollection.deleteOne({_id: _id})
+        // if (!ObjectId.isValid(id)) {
+        //     return false
+        // }
+        // const _id = new ObjectId(id)
+        const result = await postsCollection.deleteOne({_id: new ObjectId(id)})
         return result.deletedCount === 1
     },
 
