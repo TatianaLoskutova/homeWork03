@@ -42,15 +42,15 @@ export const blogsRepository = {
             createdAt: new Date().toISOString(),
             isMembership: false
         }
-        await blogsCollection.insertOne(newBlog)
-        // {
-        //     id: newBlog._id.toString(),
-        //     name: newBlog.name,
-        //     description: newBlog.description,
-        //     websiteUrl: newBlog.websiteUrl,
-        //     createdAt: newBlog.createdAt,
-        //     isMembership: newBlog.isMembership
-        // }
+        const insertedBlog = await blogsCollection.insertOne(newBlog)
+        return  {
+            id: newBlog._id.toString(),
+            name: newBlog.name,
+            description: newBlog.description,
+            websiteUrl: newBlog.websiteUrl,
+            createdAt: newBlog.createdAt,
+            isMembership: newBlog.isMembership
+        }
     },
 
     async updateBlog(id: string, data: UpdateBlogModel): Promise<boolean> {
