@@ -70,6 +70,11 @@ export const blogsRepository = {
         const result = await blogsCollection.deleteOne({id: id})
         return result.deletedCount === 1
     }
+
+    // async deleteBlog(id: string): Promise<boolean> {
+    //     const result = await blogsCollection.deleteOne({id: id})
+    //     return result.deletedCount === 1
+    // }
 }
 
 
