@@ -1,4 +1,4 @@
-import {PostMongoDbType, PostType} from '../types';
+import {BlogMongoDbType, PostMongoDbType, PostType} from '../types';
 import {blogsCollection, postsCollection} from './db';
 import {ObjectId} from 'mongodb';
 import {PostInputModel} from '../models/post/Post_Post_Model';
@@ -43,7 +43,8 @@ export const postsRepository = {
     },
 
     async createPost(data: PostInputModel): Promise<PostType | undefined> {
-        const postByBlogId = await blogsCollection.findOne({id: data.blogId})
+        // const postByBlogId = await blogsCollection.findOne({id: data.blogId})
+        const postByBlogId = await blogsCollection.findOne({_id: new ObjectId(data.blogId)})
         if (!postByBlogId) {
             return undefined
         }
