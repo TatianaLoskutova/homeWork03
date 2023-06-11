@@ -6,7 +6,7 @@ export type BlogType = {
     description: string
     websiteUrl: string
     createdAt: string
-    isMembership: boolean
+    // isMembership: boolean
 }
 
 export type BlogMongoDbType = {
@@ -15,7 +15,7 @@ export type BlogMongoDbType = {
     description: string
     websiteUrl: string
     createdAt: string
-    isMembership: boolean
+    // isMembership: boolean
 }
 
 export type PostType = {
