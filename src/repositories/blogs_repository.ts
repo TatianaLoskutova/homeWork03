@@ -36,26 +36,21 @@ export const blogsRepository = {
     },
 
     async createBlog(data: BlogInputModel): Promise<BlogType> {
-        const newBlog: BlogMongoDbType = {
+        const addedBlog: BlogMongoDbType = {
             _id: new ObjectId(),
             ...data,
             createdAt: new Date().toISOString(),
             isMembership: false
         }
-        const result = await blogsCollection.insertOne(newBlog)
-        const { _id, ...blogWithoutId } = newBlog;
-        return {
-            id: _id.toString(),
-            ...blogWithoutId
-        };
-        // return  {
-        //     id: newBlog._id.toString(),
-        //     name: newBlog.name,
-        //     description: newBlog.description,
-        //     websiteUrl: newBlog.websiteUrl,
-        //     createdAt: newBlog.createdAt,
-        //     isMembership: newBlog.isMembership
-        // }
+        const result = await blogsCollection.insertOne(addedBlog)
+        return  {
+            id: addedBlog._id.toString(),
+            name: addedBlog.name,
+            description: addedBlog.description,
+            websiteUrl: addedBlog.websiteUrl,
+            createdAt: addedBlog.createdAt,
+            isMembership: addedBlog.isMembership
+        }
     },
 
     async updateBlog(id: string, data: UpdateBlogModel): Promise<boolean> {
