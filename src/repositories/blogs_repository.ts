@@ -21,10 +21,13 @@ export const blogsRepository = {
     },
 
     async findBlogById(id: string): Promise<BlogType | null> {
-        if (ObjectId.isValid(id)) {
+        if (!ObjectId.isValid(id)) {
+            return null
+        }
             let _id = new ObjectId(id)
             const foundedBlog: BlogMongoDbType | null = await blogsCollection.findOne({_id: _id})
-            if (!foundedBlog) {
+
+        if (!foundedBlog) {
                 return null
             }
             return {
@@ -35,7 +38,6 @@ export const blogsRepository = {
                 createdAt: foundedBlog.createdAt,
                 isMembership: foundedBlog.isMembership
             }
-        }
     },
 
     async createBlog(data: BlogInputModel): Promise<BlogType> {
@@ -57,7 +59,11 @@ export const blogsRepository = {
     },
 
     async updateBlog(id: string, data: UpdateBlogModel): Promise<boolean> {
-        const result = await blogsCollection.updateOne({id: id}, {
+        if (!ObjectId.isValid(id)) {
+            return false
+        }
+        const _id = new ObjectId(id)
+        const result = await blogsCollection.updateOne({_id: _id}, {
             $set: {
                 name: data.name,
                 description: data.description,
@@ -67,8 +73,12 @@ export const blogsRepository = {
         return result.matchedCount === 1
     },
 
-    async deleteBlog(id: string): Promise<boolean> {
-        const result = await blogsCollection.deleteOne({id: id})
+    async deleteBlogById(id: string): Promise<boolean> {
+        if (!ObjectId.isValid(id)) {
+            return false
+        }
+        const _id = new ObjectId(id)
+        const result = await blogsCollection.deleteOne({_id: _id})
         return result.deletedCount === 1
     },
 }

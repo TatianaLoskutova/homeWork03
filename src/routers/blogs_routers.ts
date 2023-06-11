@@ -53,7 +53,7 @@ blogRouters.put('/:id',
 blogRouters.delete('/:id',
     authMiddleware,
     async (req: RequestWithParams<GetByIdParam>, res: Response) => {
-        const isDeleted = await blogsRepository.deleteBlog(req.params.id)
+        const isDeleted = await blogsRepository.deleteBlogById(req.params.id)
         if (isDeleted) {
             res.sendStatus(204);
         } else {
