@@ -9,29 +9,32 @@ export const blogsRepository = {
 
     async findAllBlogs(): Promise<BlogType[]> {
         const allBlogs = await blogsCollection.find({}).toArray()
-        return allBlogs.map((blog: BlogMongoDbType ) => ({
+        return allBlogs.map((blog: BlogMongoDbType) => ({
             id: blog._id.toString(),
             name: blog.name,
             description: blog.description,
             websiteUrl: blog.websiteUrl,
             createdAt: blog.createdAt,
             isMembership: blog.isMembership
-        }) )
+        }))
 
     },
 
     async findBlogById(id: string): Promise<BlogType | null> {
-        const foundedBlog: BlogMongoDbType | null = await blogsCollection.findOne({_id: ObjectId})
-        if (!foundedBlog) {
-            return null
-        }
-        return {
-            id: foundedBlog._id.toString(),
-            name: foundedBlog.name,
-            description: foundedBlog.description,
-            websiteUrl: foundedBlog.websiteUrl,
-            createdAt: foundedBlog.createdAt,
-            isMembership: foundedBlog.isMembership
+        if (ObjectId.isValid(id)) {
+            let _id = new ObjectId(id)
+            const foundedBlog: BlogMongoDbType | null = await blogsCollection.findOne({_id: _id})
+            if (!foundedBlog) {
+                return null
+            }
+            return {
+                id: foundedBlog._id.toString(),
+                name: foundedBlog.name,
+                description: foundedBlog.description,
+                websiteUrl: foundedBlog.websiteUrl,
+                createdAt: foundedBlog.createdAt,
+                isMembership: foundedBlog.isMembership
+            }
         }
     },
 
@@ -42,8 +45,8 @@ export const blogsRepository = {
             createdAt: new Date().toISOString(),
             isMembership: false
         }
-        const result = await blogsCollection.insertOne(addedBlog)
-        return  {
+        await blogsCollection.insertOne(addedBlog)
+        return {
             id: addedBlog._id.toString(),
             name: addedBlog.name,
             description: addedBlog.description,
@@ -67,12 +70,7 @@ export const blogsRepository = {
     async deleteBlog(id: string): Promise<boolean> {
         const result = await blogsCollection.deleteOne({id: id})
         return result.deletedCount === 1
-    }
-
-    // async deleteBlog(id: string): Promise<boolean> {
-    //     const result = await blogsCollection.deleteOne({id: id})
-    //     return result.deletedCount === 1
-    // }
+    },
 }
 
 
