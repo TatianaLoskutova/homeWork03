@@ -38,9 +38,7 @@ export const blogsRepository = {
     async createBlog(data: BlogInputModel): Promise<BlogType> {
         const newBlog: BlogMongoDbType = {
             _id: new ObjectId(),
-            name: data.name,
-            description: data.description,
-            websiteUrl: data.websiteUrl,
+            ...data,
             createdAt: new Date().toISOString(),
             isMembership: false
         }
