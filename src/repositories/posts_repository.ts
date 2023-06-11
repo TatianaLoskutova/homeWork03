@@ -41,9 +41,11 @@ export const postsRepository = {
         }
     },
 
-    async createPost(data: PostInputModel): Promise<PostType> {
+    async createPost(data: PostInputModel): Promise<PostType | null> {
         const postByBlogId = await blogsCollection.findOne({id: data.blogId})
-        if (postByBlogId) {
+        if (!postByBlogId) {
+            return null
+        }
             const addedPost: PostMongoDbType = {
                 _id: new ObjectId(),
                 title: data.title,
@@ -53,6 +55,7 @@ export const postsRepository = {
                 blogName: postByBlogId.name,
                 createdAt: new Date().toISOString(),
             }
+
             await postsCollection.insertOne(addedPost)
             return {
                 id: addedPost._id.toString(),
@@ -63,12 +66,12 @@ export const postsRepository = {
                 blogName: addedPost.blogName,
                 createdAt: addedPost.createdAt
             }
-        }
     },
 
     async updatePost(id: string, data: PutPostModel): Promise<boolean> {
         const postByBlogId = await blogsCollection.findOne({id: data.blogId})
-        if (!postByBlogId) {
+        const postById = await blogsCollection.findOne({id: id})
+        if (!postByBlogId || !postById) {
             return false
         }
         const _id = new ObjectId(id)
