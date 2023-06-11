@@ -42,7 +42,7 @@ export const blogsRepository = {
             description: data.description,
             websiteUrl: data.websiteUrl,
             createdAt: new Date().toISOString(),
-            // isMembership: false
+            isMembership: false
         }
         await blogsCollection.insertOne(newBlog)
         return {
@@ -51,7 +51,7 @@ export const blogsRepository = {
             description: newBlog.description,
             websiteUrl: newBlog.websiteUrl,
             createdAt: newBlog.createdAt,
-            // isMembership: newBlog.isMembership
+            isMembership: newBlog.isMembership
         }
     },
 
