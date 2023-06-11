@@ -31,7 +31,7 @@ blogRouters.post('/',
     blogWebsiteUrlValidation,
     errorsMiddleware,
     async (req: RequestWithBody<BlogInputModel>, res: Response<BlogType>) => {
-        const newBlog = await blogsRepository.createBlog(req.body.name, req.body.description, req.body.websiteUrl)
+        const newBlog = await blogsRepository.createBlog(req.body)
         res.status(201).send(newBlog)
 
     })
