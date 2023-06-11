@@ -72,12 +72,12 @@ export const postsRepository = {
 
     async updatePost(id: string, data: PutPostModel): Promise<boolean> {
         // const postByBlogId = await blogsCollection.findOne({id: data.blogId})
-        const postByBlogId = await blogsCollection.findOne({_id: new ObjectId(data.blogId)})
-        const postById = await blogsCollection.findOne({id: id})
-
-        if (!postByBlogId || !postById) {
-            return false
-        }
+        // const postByBlogId = await blogsCollection.findOne({_id: new ObjectId(data.blogId)})
+        // const postById = await blogsCollection.findOne({id: id})
+        //
+        // if (!postByBlogId || !postById) {
+        //     return false
+        // }
 
         const result = await postsCollection.updateOne({_id: new ObjectId(data.blogId)}, {
             $set: {
