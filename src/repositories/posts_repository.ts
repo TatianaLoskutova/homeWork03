@@ -1,9 +1,9 @@
-import {BlogMongoDbType, PostMongoDbType, PostType} from '../types';
+import {PostMongoDbType, PostType} from '../types';
 import {blogsCollection, postsCollection} from './db';
 import {ObjectId} from 'mongodb';
 import {PostInputModel} from '../models/post/Post_Post_Model';
 import {PutPostModel} from '../models/post/Put_Post_Model';
-import {blogsRepository} from './blogs_repository';
+
 
 
 export const postsRepository = {
