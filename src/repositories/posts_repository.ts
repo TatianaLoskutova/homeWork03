@@ -78,8 +78,8 @@ export const postsRepository = {
         if (!postByBlogId || !postById) {
             return false
         }
-        const _id = new ObjectId(id)
-        const result = await postsCollection.updateOne({_id: _id}, {
+
+        const result = await postsCollection.updateOne({_id: new ObjectId(data.blogId)}, {
             $set: {
                 title: data.title,
                 shortDescription: data.shortDescription,
