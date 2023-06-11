@@ -79,12 +79,12 @@ export const postsRepository = {
         //     return false
         // }
 
-        const result = await postsCollection.updateOne({_id: new ObjectId(data.blogId)}, {
+        const result = await postsCollection.updateOne({_id: new ObjectId(id)}, {
             $set: {
                 title: data.title,
                 shortDescription: data.shortDescription,
                 content: data.content,
-                // blogId: data.blogId
+                blogId: data.blogId
             }
         })
         return result.matchedCount === 1
