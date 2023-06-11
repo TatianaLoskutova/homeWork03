@@ -43,14 +43,14 @@ export const blogsRepository = {
             isMembership: false
         }
         await blogsCollection.insertOne(newBlog)
-        return {
-            id: newBlog._id.toString(),
-            name: data.name,
-            description: data.description,
-            websiteUrl: data.websiteUrl,
-            createdAt: newBlog.createdAt,
-            isMembership: newBlog.isMembership
-        }
+        // {
+        //     id: newBlog._id.toString(),
+        //     name: newBlog.name,
+        //     description: newBlog.description,
+        //     websiteUrl: newBlog.websiteUrl,
+        //     createdAt: newBlog.createdAt,
+        //     isMembership: newBlog.isMembership
+        // }
     },
 
     async updateBlog(id: string, data: UpdateBlogModel): Promise<boolean> {
