@@ -42,10 +42,10 @@ export const postsRepository = {
         }
     },
 
-    async createPost(data: PostInputModel): Promise<PostType | null> {
+    async createPost(data: PostInputModel): Promise<PostType | undefined> {
         const postByBlogId = await blogsCollection.findOne({id: data.blogId})
         if (!postByBlogId) {
-            return null
+            return undefined
         }
             const addedPost: PostMongoDbType = {
                 _id: new ObjectId(),
