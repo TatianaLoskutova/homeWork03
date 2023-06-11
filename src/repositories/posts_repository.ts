@@ -84,7 +84,7 @@ export const postsRepository = {
                 title: data.title,
                 shortDescription: data.shortDescription,
                 content: data.content,
-                blogId: data.blogId
+                // blogId: data.blogId
             }
         })
         return result.matchedCount === 1
