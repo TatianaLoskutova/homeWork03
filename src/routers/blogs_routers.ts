@@ -26,14 +26,13 @@ blogRouters.get('/:id', async (req: RequestWithParams<GetByIdParam>, res: Respon
 
 blogRouters.post('/',
     authMiddleware,
-    // blogNameValidation,
-    // blogDescriptionValidation,
-    // blogWebsiteUrlValidation,
-    // errorsMiddleware,
+    blogNameValidation,
+    blogDescriptionValidation,
+    blogWebsiteUrlValidation,
+    errorsMiddleware,
     async (req: RequestWithBody<BlogInputModel>, res: Response<BlogType>) => {
         const newBlog = await blogsRepository.createBlog(req.body)
         res.status(201).send(newBlog)
-
     })
 
 blogRouters.put('/:id',
