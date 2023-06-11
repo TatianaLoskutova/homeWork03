@@ -35,10 +35,12 @@ export const blogsRepository = {
         }
     },
 
-    async createBlog(data: BlogInputModel): Promise<BlogType> {
+    async createBlog(name: string, description: string, websiteUrl:string ): Promise<BlogType> {
         const newBlog: BlogMongoDbType = {
             _id: new ObjectId(),
-            ...data,
+            name: name,
+            description: description,
+            websiteUrl: websiteUrl,
             createdAt: new Date().toISOString(),
             isMembership: false
         }
