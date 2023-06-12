@@ -43,8 +43,6 @@ export type ValidationError = {
     field: string
 }
 
-export const blogsDataBase: BlogType[] = []
-export const postsDataBase: PostType[] = []
 
 export type RequestWithParams<T> = Request<T>
 export type RequestWithBody<T> = Request<{},{},T>
